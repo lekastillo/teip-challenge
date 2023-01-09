@@ -56,3 +56,4 @@ group :development do
 end
 
 gem "nokogiri", force_ruby_platform: true
+gem "paranoia", '2.6.1'

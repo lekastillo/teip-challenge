@@ -138,6 +138,8 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     parallel (1.22.1)
+    paranoia (2.6.1)
+      activerecord (>= 5.1, < 7.1)
     parser (3.2.0.0)
       ast (~> 2.4.1)
     pg (1.4.5)
@@ -236,6 +238,7 @@ DEPENDENCIES
   dotenv-rails
   listen (~> 3.3)
   nokogiri
+  paranoia (= 2.6.1)
   pg (~> 1.1)
   pry-byebug
   puma (~> 5.0)
