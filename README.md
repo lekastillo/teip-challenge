@@ -5,20 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* DB diagram
+  * https://dbdiagram.io/d/63b9a1e47d39e42284e981ee
+* Jira Task
+  * https://lc-software.atlassian.net/jira/software/projects/TC/boards/3
