@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_09_055944) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_09_061024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_055944) do
     t.index ["user_id"], name: "index_product_likes_on_user_id"
   end
 
+  create_table "product_transactions", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "order_id"
+    t.integer "affected_qty", null: false
+    t.integer "old_balance", null: false
+    t.integer "new_balance", null: false
+    t.string "type", null: false
+    t.string "operation", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_product_transactions_on_deleted_at"
+    t.index ["order_id"], name: "index_product_transactions_on_order_id"
+    t.index ["product_id"], name: "index_product_transactions_on_product_id"
+    t.index ["user_id"], name: "index_product_transactions_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.integer "stock", default: 0, null: false
@@ -66,11 +84,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_055944) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "names"
-    t.string "last_names"
+    t.string "names", null: false
+    t.string "last_names", null: false
     t.string "email", null: false
-    t.string "phone"
-    t.string "role"
+    t.string "phone", null: false
+    t.string "role", default: "user"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -84,4 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_055944) do
   add_foreign_key "orders", "users"
   add_foreign_key "product_likes", "products"
   add_foreign_key "product_likes", "users"
+  add_foreign_key "product_transactions", "products"
+  add_foreign_key "product_transactions", "users"
 end
