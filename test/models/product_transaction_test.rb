@@ -10,18 +10,18 @@ end
 #
 # Table name: product_transactions
 #
-#  id           :bigint           not null, primary key
-#  affected_qty :integer          not null
-#  deleted_at   :datetime
-#  new_balance  :integer          not null
-#  old_balance  :integer          not null
-#  operation    :string           not null
-#  type         :string           not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  order_id     :bigint
-#  product_id   :bigint           not null
-#  user_id      :bigint           not null
+#  id               :bigint           not null, primary key
+#  affected_qty     :integer          not null
+#  deleted_at       :datetime
+#  new_balance      :integer          not null
+#  old_balance      :integer          not null
+#  operation        :string           not null
+#  transaction_type :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  order_id         :bigint
+#  product_id       :bigint           not null
+#  user_id          :bigint           not null
 #
 # Indexes
 #

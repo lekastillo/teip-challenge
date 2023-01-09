@@ -53,6 +53,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'  
   gem 'web-console', '>= 4.1.0'
+  gem 'faker'
 end
 
 gem "nokogiri", force_ruby_platform: true

@@ -57,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_09_061024) do
     t.integer "affected_qty", null: false
     t.integer "old_balance", null: false
     t.integer "new_balance", null: false
-    t.string "type", null: false
+    t.string "transaction_type", null: false
     t.string "operation", null: false
     t.datetime "deleted_at"
     t.datetime "created_at", null: false

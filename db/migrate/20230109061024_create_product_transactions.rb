@@ -7,7 +7,7 @@ class CreateProductTransactions < ActiveRecord::Migration[7.0]
       t.integer :affected_qty, null: false
       t.integer :old_balance, null: false
       t.integer :new_balance, null: false
-      t.string :type, null: false
+      t.string :transaction_type, null: false
       t.string :operation, null: false
       t.datetime :deleted_at
 
