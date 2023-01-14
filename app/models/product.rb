@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    paginates_per 10
     has_many :order_details
     has_many :product_likes
 

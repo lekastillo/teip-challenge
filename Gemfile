@@ -66,7 +66,8 @@ gem 'paranoia', '2.6.1'
 
 gem 'dry-validation'
 
-gem 'trailblazer', '>= 2.1.0'
-gem 'trailblazer-rails'
-gem 'roar-jsonapi'
-gem 'trailblazer-endpoint'
+gem 'trailblazer-rails', '2.4.3'
+gem 'trailblazer-loader', '0.1.2'
+gem 'roar-jsonapi', '0.0.3'
+gem 'multi_json'
+gem 'kaminari'
