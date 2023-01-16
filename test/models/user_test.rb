@@ -10,15 +10,16 @@ end
 #
 # Table name: users
 #
-#  id         :bigint           not null, primary key
-#  deleted_at :datetime
-#  email      :string           not null
-#  last_names :string           not null
-#  names      :string           not null
-#  phone      :string           not null
-#  role       :string           default("user")
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :bigint           not null, primary key
+#  deleted_at      :datetime
+#  email           :string           not null
+#  last_names      :string           not null
+#  names           :string           not null
+#  password_digest :string
+#  phone           :string           not null
+#  role            :string           default("user")
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #

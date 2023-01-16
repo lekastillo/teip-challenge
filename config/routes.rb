@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   namespace :web_api do
     namespace :v1 do
+      post 'auth/login'
+      post 'auth/signup'
       resources :products, only: [:index, :show], defaults: { format: 'json' }
     end
   end

@@ -18,8 +18,11 @@ gem 'puma', '~> 5.0'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem 'kredis'
 
+#adding jwt gem for token access
+gem 'jwt', '2.6.0'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '3.1.18'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -68,6 +71,7 @@ gem 'dry-validation'
 
 gem 'trailblazer-rails', '2.4.3'
 gem 'trailblazer-loader', '0.1.2'
+# gem 'reform-rails'
 gem 'roar-jsonapi', '0.0.3'
 gem 'multi_json'
 gem 'kaminari'
