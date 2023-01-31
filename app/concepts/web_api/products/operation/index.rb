@@ -3,7 +3,7 @@ module WebApi::Products::Operation
     step :find_all
 
     def find_all(ctx, **)
-      ctx[:products] = ProductsRepresenter.for_collection.new(::Product.page(ctx[:params][:page])).to_json
+      ctx[:products] = ProductRepresenter.for_collection.new(::Product.page(ctx[:params][:page])).to_json
     end
   end
 end

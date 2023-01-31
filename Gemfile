@@ -75,3 +75,6 @@ gem 'trailblazer-loader', '0.1.2'
 gem 'roar-jsonapi', '0.0.3'
 gem 'multi_json'
 gem 'kaminari'
+
+gem 'rswag-api'
+gem 'rswag-ui'

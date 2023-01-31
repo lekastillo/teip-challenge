@@ -16,7 +16,7 @@ class WebApi::V1::AuthController < ApplicationController
       render nothing: true, status: :created
       return
     else
-      render json: { errors: result[:"contract.default"].errors.messages.as_json, message: "unable to create user, check errors" }
+      render json: { errors: result[:"contract.default"].errors.messages.as_json, message: "unable to create user, check errors" }, status: :bad_request
       return
     end
   end

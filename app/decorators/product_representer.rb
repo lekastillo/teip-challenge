@@ -1,5 +1,5 @@
 require 'roar/json/json_api'
-class ProductsRepresenter < Roar::Decorator
+class ProductRepresenter < Roar::Decorator
     include Roar::JSON::JSONAPI.resource :products
 
     attributes do
@@ -16,6 +16,6 @@ class ProductsRepresenter < Roar::Decorator
     end
   
     # resource object links
-    link(:self) { "#{ENV['PROTOCOL']}://#{ENV['HOST']}:#{ENV['PORT']}/#{ENV['DEFAULT_WEB_API']}/#{represented.class.to_s.pluralize.downcase}/#{represented.id}" }
+    # link(:self) { "#{ENV['PROTOCOL']}://#{ENV['HOST']}:#{ENV['PORT']}/#{ENV['DEFAULT_WEB_API']}/#{represented.class.to_s.pluralize.downcase}/#{represented.id}" }
 
   end

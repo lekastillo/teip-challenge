@@ -403,7 +403,9 @@ DEPENDENCIES
   roar-jsonapi (= 0.0.3)
   rspec-rails
   rswag
+  rswag-api
   rswag-specs
+  rswag-ui
   rubocop
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -13,10 +13,12 @@ class JwtManager
             decoded = JWT.decode(token, priv_key.to_s, true, { algorithm: 'HS256' })
             user = HashWithIndifferentAccess.new decoded[0]
             return { success: true, user: user }
-        rescue ActiveRecord::RecordNotFound
-            return { success: false, message: 'Record not found' }
         rescue JWT::ExpiredSignature
             return { success: false, message: 'Expired signature' }
+        rescue JWT::DecodeError
+            return { success: false, message: 'Missing jwt' }
+        rescue ActiveRecord::RecordNotFound
+            return { success: false, message: 'Record not found' }
         end
     end
 

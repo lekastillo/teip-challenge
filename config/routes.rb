@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       post 'auth/login'
       post 'auth/signup'
       resources :products, only: [:index, :show], defaults: { format: 'json' }
+
+      resources :orders, only: [:index, :create] do 
+        member do
+          post 'add_products'
+        end
+      end
     end
   end
 

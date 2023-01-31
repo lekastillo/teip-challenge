@@ -1,0 +1,35 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  # "/posts":
+  #   post:
+  #     summary: Creates a blog
+  #     tags:
+  #     - Blogs
+  #     parameters: []
+  #     responses:
+  #       '201':
+  #         description: blog created
+  #       '422':
+  #         description: invalid request
+  #     requestBody:
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               title:
+  #                 type: string
+  #               content:
+  #                 type: string
+  #             required:
+  #             - title
+  #             - content
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/crm_api/v1
