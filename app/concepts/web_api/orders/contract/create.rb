@@ -21,8 +21,7 @@ module WebApi::Orders::Contract
                 required(:cart).array(CartProduct)
             end
             rule(:cart).each do
-
-            product_cart = value
+                product_cart = value
                 product = Product.find_by(id: product_cart[:product_id])
                 key.failure(text: 'Product not found', product_id: product_cart[:product_id]) if product.nil?
                 if product.present? && product.stock <= product_cart[:quantity]

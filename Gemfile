@@ -66,7 +66,7 @@ end
 
 gem 'nokogiri', force_ruby_platform: true
 gem 'paranoia', '2.6.1'
-
+gem 'dry-rails'
 gem 'dry-validation'
 
 gem 'trailblazer-rails', '2.4.3'
@@ -78,3 +78,4 @@ gem 'kaminari'
 
 gem 'rswag-api'
 gem 'rswag-ui'
+gem 'aasm'

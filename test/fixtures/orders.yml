@@ -16,14 +16,19 @@ two:
 #
 # Table name: orders
 #
-#  id         :bigint           not null, primary key
-#  date       :date
-#  deleted_at :datetime
-#  status     :string           default("new")
-#  total      :decimal(12, 2)   default(0.0), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :bigint           not null
+#  id             :bigint           not null, primary key
+#  cancel_reason  :string
+#  cancelled_by   :integer
+#  cancelled_date :date
+#  confirm_date   :date
+#  confirmed_by   :integer
+#  date           :date
+#  deleted_at     :datetime
+#  status         :string           default("new")
+#  total          :decimal(12, 2)   default(0.0), not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :bigint           not null
 #
 # Indexes
 #

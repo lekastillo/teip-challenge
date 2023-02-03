@@ -8,6 +8,17 @@ class Product < ApplicationRecord
     validates :name, uniqueness: true
     validates :sku, uniqueness: true
     validates :price, numericality: { greater_than: 0}
+
+    attr_accessor :user_id
+
+    after_create :set_status_stock
+
+    def set_status_stock
+        sstatus = :in_stock
+        sstatus = :out_of_stock if stock == 0
+        sstatus = :running_low if stock < 10
+        update(status: sstatus)
+    end
 end
 
 # == Schema Information

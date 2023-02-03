@@ -3,8 +3,8 @@ class ProductTransaction < ApplicationRecord
   belongs_to :user
   belongs_to :order, optional: true
 
-  enum :operation, %i[add subtract]
-  enum :transaction_type, %i[inventory_load sale cancelation broken]
+  enum :operation, { add: 'add', subtract: 'subtract' }
+  enum :transaction_type, { inventory_load: 'inventory_load', sale: 'sale', cancelation: 'cancelation', broken: 'broken' }
 end
 
 # == Schema Information

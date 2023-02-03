@@ -1,5 +1,5 @@
 require 'jwt_manager'
-class WebApi::V1::AuthController < ApplicationController
+class WebApi::V1::AuthController < WebController
   skip_before_action :authenticate_user
   def login
     run WebApi::Authentication::Operation::Login do |ctx, _params: params, **|

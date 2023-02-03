@@ -23,14 +23,22 @@ module WebApi::Orders::Operation
 
         if OrderDetail.create(order_id: new_order_created.id,product_id: product.id, quantity: cart_item[:quantity].to_s, subtotal: subtotal)
 
+          ProductTransaction.create(
+            affected_qty: cart_item[:quantity].to_i,
+            new_balance: product.stock - cart_item[:quantity].to_i,
+            old_balance: product.stock,
+            operation: 'subtract',
+            transaction_type: 'sale',
+            product_id: product.id,
+            order_id: new_order_created.id,
+            user_id: new_order_created.user_id
+          )
           # reduce quantity to product
           product.update(stock: product.stock - cart_item[:quantity].to_i)
           new_order_created.total = new_order_created.total + subtotal
           new_order_created.save
         end
       end
-
     end
   end
-
 end
