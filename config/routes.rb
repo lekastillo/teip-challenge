@@ -10,7 +10,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       post 'auth/login'
       post 'auth/signup'
-      resources :products, only: [:index, :show]
+      resources :products, only: [:index, :show] do
+        collection do
+          get :popular_products
+          get :top_products
+        end
+      end
       resources :product_likes, only: [:create]
 
       resources :orders, only: [:index, :create] do 

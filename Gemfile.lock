@@ -334,6 +334,9 @@ GEM
     rubocop-ast (1.24.1)
       parser (>= 3.1.1.0)
     ruby-progressbar (1.11.0)
+    scenic (1.7.0)
+      activerecord (>= 4.0.0)
+      railties (>= 4.0.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -423,6 +426,7 @@ DEPENDENCIES
   rswag-specs
   rswag-ui
   rubocop
+  scenic
   spring
   spring-watcher-listen (~> 2.0.0)
   trailblazer-loader (= 0.1.2)

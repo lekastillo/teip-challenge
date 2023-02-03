@@ -79,3 +79,4 @@ gem 'kaminari'
 gem 'rswag-api'
 gem 'rswag-ui'
 gem 'aasm'
+gem "scenic"

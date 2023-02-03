@@ -11,4 +11,17 @@ class WebApi::V1::ProductsController < WebController
       render json: ctx[:product]
     end
   end
+
+  def top_products
+    run WebApi::Products::Operation::Top do |ctx, _params: {}, **|
+      render json: ctx[:top_products]
+    end
+  end
+
+  def popular_products
+    run WebApi::Products::Operation::Popular do |ctx, _params: {}, **|
+      render json: ctx[:popular_products]
+    end
+  end
+
 end

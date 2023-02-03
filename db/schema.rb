@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_03_131149) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_03_180836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,4 +110,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_03_131149) do
   add_foreign_key "product_likes", "users"
   add_foreign_key "product_transactions", "products"
   add_foreign_key "product_transactions", "users"
+
+  create_view "top_products", sql_definition: <<-SQL
+      SELECT p.id,
+      p.name,
+      sum(od.quantity) AS sells,
+      sum(((od.quantity)::numeric * p.price)) AS amount
+     FROM ((products p
+       JOIN order_details od ON ((p.id = od.product_id)))
+       JOIN orders o ON ((o.id = od.order_id)))
+    WHERE ((o.status)::text = 'confirmed'::text)
+    GROUP BY p.id, p.name
+    ORDER BY (sum(od.quantity)) DESC;
+  SQL
+  create_view "popular_products", sql_definition: <<-SQL
+      SELECT p.id,
+      p.name,
+      count(pl.product_id) AS likes
+     FROM (products p
+       JOIN product_likes pl ON ((p.id = pl.product_id)))
+    GROUP BY p.id, p.name
+    ORDER BY (count(pl.product_id)) DESC;
+  SQL
 end
