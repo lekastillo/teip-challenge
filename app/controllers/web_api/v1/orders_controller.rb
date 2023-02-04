@@ -11,7 +11,7 @@ class WebApi::V1::OrdersController < WebController
     run WebApi::Orders::Operation::Create do |ctx, _params: params[:order], **|
       if ctx[:"contract.default"].model.persisted?
         order = OrderRepresenter.new(ctx[:"contract.default"].model)
-        render json: { order: order.as_json }, status: :created
+        render json: order.as_json, status: :created
       else
         render json: { order: ctx[:"contract.default"].as_json }, status: :created
       end

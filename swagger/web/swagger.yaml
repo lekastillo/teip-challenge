@@ -58,7 +58,7 @@ paths:
         content:
           application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/UserRequest'
               examples: 
                 valid_login:
                   summary: Valid Singup example
@@ -84,6 +84,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+              examples:
+                product_list:
+                  summary: Valid products
+                  value: { 'data': [{ "id": "4", "attributes": { "name": "Practical Rubber Bag", "sku": "B0000W46R6", "price": "70.62", "stock": 100, "description": "Grocery & Health", "created-at": "2023-01-09T06:57:26.118Z", "updated-at": "2023-01-09T06:57:26.118Z" }, "type": "products" }]}
         '401':
           description: Unauthorized
   "/products/{productId}":
@@ -107,6 +111,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductResponse'
+              examples:
+                product:
+                  summary: Valid product
+                  value: { 'data': { "id": "4", "attributes": { "name": "Practical Rubber Bag", "sku": "B0000W46R6", "price": "70.62", "stock": 100, "description": "Grocery & Health", "created-at": "2023-01-09T06:57:26.118Z", "updated-at": "2023-01-09T06:57:26.118Z" }, "type": "products" }}
         '401':
           description: Unauthorized
   "/product_likes":
@@ -132,6 +140,42 @@ paths:
                 valid_order:
                   summary: Valid order
                   value: { "product_like": { "product_id": 1 } }
+  "/products/top_products":
+    get:
+      summary: List top products
+      tags:
+      - Products
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of top Products
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopProductsResponse'
+              examples:
+                product_list:
+                  summary: Top products
+                  value: { "data": [ { "id": "22", "attributes": { "id": 22, "name": "Mediocre Concrete Lamp", "sells": 26, "amount": "1829.36" }, "type": "top-products" }] }
+  "/products/popular_products":
+    get:
+      summary: List popular products
+      tags:
+      - Products
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of popular Products
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PopularProductsResponse'
+              examples:
+                product_list:
+                  summary: Popular products
+                  value: { "data": [ { "id": "22", "attributes": { "id": 22, "name": "Mediocre Concrete Lamp", "likes": 3 }, "type": "popular-products" }] }
   "/orders":
     post:
       summary: Create a new order
@@ -142,6 +186,12 @@ paths:
       responses:
         '201':
           description: Order created successfully
+          content: 
+            application/json:
+              examples:
+                product_list:
+                  summary: Created order
+                  value: {"data": {"id": "37","attributes": {"date": "2023-02-03","status": "new","total": "231.81","user": {"data": {"id": "2","attributes": {"names": "Luis","last-names": "Castillo","email": "luis@teip.io","phone": "+50379900988","role": "user"},"type": "users"}},"created-at": "2023-02-04T01:06:26.408Z","updated-at": "2023-02-04T01:06:26.462Z","order-details": [{"data": {"id": "31","attributes": {"order-id": 37,"product": {"data": {"id": "1","attributes": {"name": "Small Paper Knife","sku": "B000HDT0BU","price": "17.4","stock": 77,"description": "Computers","created-at": "2023-01-09T06:57:26.076Z","updated-at": "2023-02-04T01:06:26.442Z"},"type": "products"}},"quantity": 2,"subtotal": "34.8","created-at": "2023-02-04T01:06:26.423Z","updated-at": "2023-02-04T01:06:26.423Z"},"type": "order-details"}},{"data": {"id": "32","attributes": {"order-id": 37,"product": {"data": {"id": "2","attributes": {"name": "Gorgeous Rubber Wallet","sku": "B000FOOQK6","price": "65.67","stock": 74,"description": "Clothing","created-at": "2023-01-09T06:57:26.102Z","updated-at": "2023-02-04T01:06:26.461Z"},"type": "products"}},"quantity": 3,"subtotal": "197.01","created-at": "2023-02-04T01:06:26.447Z","updated-at": "2023-02-04T01:06:26.447Z"},"type": "order-details"}}]},"type": "orders","links": {"self": "http://localhost:3000/web_api/v1/orders/37"}}}
         '401':
           description: Unauthorized
         '400':
@@ -150,11 +200,26 @@ paths:
         content:
           application/json:
               schema:
-                $ref: '#/components/schemas/CreateOrderRequest'
+                $ref: '#/components/schemas/OrderRequest'
               examples: 
                 valid_order:
                   summary: Valid order
                   value: { "order": { "cart": [ { "product_id": 1, "quantity": 1 }, { "product_id": 2, "quantity": 1 } ] } }
+    get:
+      summary: List user's orders
+      tags:
+      - Orders
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of orders
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
 components:
   securitySchemes:
       bearerAuth:
@@ -197,7 +262,7 @@ components:
           type: array
           items:
             type: string
-    User:
+    UserRequest:
       type: object
       properties:
         email:
@@ -217,7 +282,7 @@ components:
         - password
         - password_confirmation
         - phone
-    Product:
+    ProductRequest:
       type: object
       properties:
         name:
@@ -241,7 +306,7 @@ components:
         - sku
         - price
         - stock
-    Order:
+    OrderRequest:
       type: object
       properties:
         cart:
@@ -253,21 +318,12 @@ components:
                 type: number
               quantity:
                 type: number
-    CreateOrderRequest:
+    OrderResponse:
       type: object
       properties:
-        order:
+        data:
           type: object
-          properties:
-            cart:
-              type: array
-              items:
-                type: object
-                properties:
-                  product_id:
-                    type: number
-                  quantity:
-                    type: number
+          $ref: '#/components/schemas/Order'
     ProductData:
       type: object
       properties:
@@ -275,7 +331,6 @@ components:
           type: string
         attributes:
           type: object
-          $ref: '#/components/schemas/Product'
         type:
           type: string
         links:
@@ -283,6 +338,125 @@ components:
           properties:
             self:
               type: string
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        attributes:
+            type: object
+            properties:
+              id:
+                type: string
+              attributes:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  attributes:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        format: date
+                      status:
+                        type: string
+                      total:
+                        type: string
+                      user:
+                        type: object
+                      properties:
+                        properties:
+                          data:
+                            type: object
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: number
+                                attributes:
+                                  type: object
+                                  properties:
+                                    date:
+                                      type: string
+                                      format: date
+                                    status:
+                                      type: string
+                                type:
+                                  type: string
+                                links:
+                                  type: object
+                                  properties:
+                                    self:
+                                      type: string
+                  type:
+                    type: string
+                  links:
+                    type: object
+                    properties:
+                      self:
+                        type: string
+        type:
+          type: string
+        links:
+          type: object
+          properties:
+            self:
+              type: string
+    TopProductsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              attributes:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  sells:
+                    type: number
+                  amount:
+                    type: number
+              type:
+                type: string
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
+    PopularProductsResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              attributes:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  name:
+                    type: string
+                  likes:
+                    type: number
+              type:
+                type: string
+              links:
+                type: object
+                properties:
+                  self:
+                    type: string
     ProductResponse:
       type: object
       properties:

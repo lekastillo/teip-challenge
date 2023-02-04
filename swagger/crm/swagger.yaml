@@ -4,32 +4,108 @@ info:
   title: API V1
   version: v1
 paths:
-  # "/posts":
-  #   post:
-  #     summary: Creates a blog
-  #     tags:
-  #     - Blogs
-  #     parameters: []
-  #     responses:
-  #       '201':
-  #         description: blog created
-  #       '422':
-  #         description: invalid request
-  #     requestBody:
-  #       content:
-  #         application/json:
-  #           schema:
-  #             type: object
-  #             properties:
-  #               title:
-  #                 type: string
-  #               content:
-  #                 type: string
-  #             required:
-  #             - title
-  #             - content
+  "/products":
+    post:
+      summary: Create product
+      tags:
+      - Products
+      security:
+        - bearerAuth: []
+      responses:
+        '201':
+          description: Product created successfully
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+      requestBody:
+        content:
+          application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples: 
+                product:
+                  summary: Valid order
+                  value: {"product": {"name": "Camina XL f5","sku": "CAMXL1f5","price": 5.67,"stock": 15,"description": "Clothing"}}
+  "/orders/{orderId}/cancel":
+    patch:
+      summary: Cancel order
+      tags:
+      - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: Numeric id of the order
+      responses:
+        '200':
+          description: Order cancelled successful
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+      requestBody:
+        content:
+          application/json:
+              schema:
+                type: object
+                properties:
+                  cancel_reason:
+                    type: string
+              examples: 
+                product:
+                  summary: Cancel order
+                  value: {"cancel_reason": "No le queremos vender a este loco"}
+  "/orders/{orderId}/confirm":
+    patch:
+      summary: Confirm order
+      tags:
+      - Orders
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: orderId
+          schema:
+            type: string
+          required: true
+          description: Numeric id of the order
+      responses:
+        '200':
+          description: Order confirmed successful
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+components:
+  securitySchemes:
+      bearerAuth:
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
+  schemas:
+    Product:
+      type: object
+      properties:
+        product:
+          type: object
+          properties:
+            name:
+              type: string
+            sku:
+              type: string
+            price:
+              type: number
+            stock:
+              type: number
+            description:
+              type: string
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000/crm_api/v1
+      default: localhost:3000/web_api/v1
