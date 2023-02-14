@@ -391,6 +391,7 @@ GEM
     zeitwerk (2.6.6)
 
 PLATFORMS
+  aarch64-linux-musl
   arm64-darwin-21
 
 DEPENDENCIES
@@ -438,4 +439,4 @@ RUBY VERSION
    ruby 3.1.2p20
 
 BUNDLED WITH
-   2.4.3
+   2.4.6

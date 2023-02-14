@@ -10,7 +10,7 @@ ProductTransaction.destroy_all
 Product.destroy_all
 User.destroy_all
 
-user_admin = User.create(names: 'Super', last_names: 'Admin', email: 'admin@teip.challenge', phone: '+19833664882', role: 'admin')
+user_admin = User.create(names: 'Super', last_names: 'Admin', email: 'admin@teip.challenge', phone: '+19833664882', role: 'admin', password: 'P@sssword')
 
 50.times do |index|
 
